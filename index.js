@@ -2,14 +2,14 @@ const axios = require('axios');
 const fs = require('fs');
 
 
-const clientID = '2725fd708a5e77fb2d87cfe9623af14e';
-const secretKey = 'f74b73e7ba93993d413eb0d758308be92534e7be';
+const clientID = '';
+const secretKey = '';
 // let tokenType = '';
 
 // const desinationStream = 7106516;
 const destHub = 118754;
-// const outputFile = 'unqork';
-// const toppage = 15;
+const outputFile = 'unqork';
+
 const ogData = require('./source.js');
 const totalItems = ogData.length;
 
@@ -34,22 +34,9 @@ const auth = async (key, secret) => {
 }
 
 
-const updateStream = async (token, stream) => {
+const updateStream = async (token, item) => {
     
-    return axios.post(`https://v2.api.uberflip.com/hubs/${destHub}/streams/${stream.id}/options`,{
-        "visible_in_shout": stream.visible_in_shout,
-        // "pinned_in_shout": stream.pinned_in_shout,
-        // "hide_publish_date": stream.hide_publish_date,
-        // "enable_preview_mode": stream.enable_preview_mode, // When checked, the Items in this Stream will be shortened and displayed with a 'Continue Reading' button
-        // "paused": stream.paused,
-        // allow_style: 0, //Allow insline styling
-        // canonical_redirect: 1,
-        // apply_tags: 0, // create tags from category in rss
-        // author_match: 0,
-        // canonical_meta: 0,
-        // exclude_from_search: 1,
-        // muted: 1, // exclude from latest content feed
-    },
+    return axios.get(`https://v2.api.uberflip.com/items/${item.itemId}`,
     {
         headers: {
             "Authorization": `Bearer ${token}`,
